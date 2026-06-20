@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>捕鱼达人 — 稳定入口与玩法说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #ecf0f4;
+            color: #1e2a3a;
+            line-height: 1.6;
+        }
+
+        /* ---- Hero 区：深色头图 ---- */
+        .hero {
+            background: linear-gradient(145deg, #0b141f 0%, #1a2b3c 100%);
+            color: #e9edf0;
+            padding: 80px 24px 70px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(60, 140, 200, 0.18) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 span {
+            font-weight: 600;
+            color: #6bb0e6;
+        }
+
+        .hero p {
+            max-width: 680px;
+            margin: 12px auto 0;
+            font-size: 1.2rem;
+            color: #b4c9db;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 8px 28px;
+            background: rgba(107, 176, 230, 0.12);
+            border: 1px solid rgba(107, 176, 230, 0.25);
+            border-radius: 40px;
+            font-size: 0.95rem;
+            color: #b4d0e8;
+        }
+
+        /* ---- 浅色正文区 ---- */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+        }
+
+        /* section 通用 */
+        .section {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px 44px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            border-left: 5px solid #3f8eca;
+            padding-left: 18px;
+            margin-bottom: 24px;
+            color: #17222e;
+        }
+
+        .section h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 20px 0 8px;
+            color: #1e3a4f;
+        }
+
+        .section p {
+            margin-bottom: 14px;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 28px;
+            margin: 20px 0 10px;
+        }
+
+        .section ul li {
+            position: relative;
+            padding-left: 28px;
+            font-size: 1rem;
+            flex: 0 1 200px;
+        }
+
+        .section ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #3f8eca;
+            font-weight: bold;
+        }
+
+        /* ---- 优势卡片式 ---- */
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin: 24px 0 8px;
+        }
+
+        .advantage-card {
+            background: #f6f9fc;
+            border-radius: 16px;
+            padding: 24px 20px;
+            border: 1px solid #e2eaf0;
+            transition: all 0.2s;
+        }
+
+        .advantage-card:hover {
+            border-color: #8ec0e6;
+            background: #f0f6fd;
+        }
+
+        .advantage-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #143141;
+        }
+
+        .advantage-card p {
+            font-size: 0.95rem;
+            color: #2f4257;
+            margin-bottom: 0;
+        }
+
+        /* ---- FAQ 摘要 ---- */
+        .faq-item {
+            border-bottom: 1px solid #e2e9f0;
+            padding: 14px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: #1a2f40;
+            font-size: 1.05rem;
+        }
+
+        .faq-answer {
+            margin-top: 6px;
+            color: #3b4f63;
+            font-size: 0.97rem;
+        }
+
+        /* ---- 底部链接 ---- */
+        .footer-links {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px 44px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 16px;
+        }
+
+        .footer-links p {
+            color: #3d566b;
+            font-size: 0.96rem;
+        }
+
+        .footer-links a {
+            color: #2679b5;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border 0.15s;
+        }
+
+        .footer-links a:hover {
+            border-bottom: 1px solid #2679b5;
+        }
+
+        /* 正文中的强调链接（符合要求：文本必须为「捕鱼达人」） */
+        .inline-link {
+            color: #2679b5;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted rgba(38, 121, 181, 0.3);
+        }
+
+        .inline-link:hover {
+            border-bottom: 1px solid #2679b5;
+        }
+
+        /* ---- 响应式 ---- */
+        @media (max-width: 680px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section {
+                padding: 28px 20px;
+            }
+
+            .advantage-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 60px 16px 50px;
+            }
+
+            .container {
+                padding: 24px 12px 40px;
+            }
+
+            .section ul li {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1><span>捕鱼达人</span> · 稳定入口</h1>
+        <p>一个以海洋为主题的休闲玩法，操作直观，节奏轻快。页面整理了主要入口、特点与常见疑问，方便新老玩家快速了解。</p>
+        <span class="tagline">轻量 · 稳定 · 说明向</span>
+    </section>
+
+    <!-- 正文区 -->
+    <div class="container">
+
+        <!-- 说明区：从稳定入口角度展开 -->
+        <section class="section">
+            <h2>关于这个入口页面</h2>
+            <p>不少玩家在寻找 <a href="https://bydaren.com" class="inline-link">捕鱼达人</a> 时，会遇到链接变动或信息分散的问题。本页作为一份整理后的参考说明，着重介绍该玩法的基础设定、运行环境和常见疑问，不包含第三方跳转或推广内容。</p>
+            <p>如果你已经熟悉基本操作，可以直接在浏览器中访问 <strong>bydaren.com</strong> 查看最新可用页面。以下内容主要围绕“如何稳定找到入口”“玩法特点”以及“设备适配”展开，均基于公开信息整理。</p>
+        </section>
+
+        <!-- 优势区：卡片形式 -->
+        <section class="section">
+            <h2>为什么关注这个入口</h2>
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <h4>直接访问</h4>
+                    <p>无需额外注册或跳转，浏览器打开即可看到最新界面。适合希望快速体验的用户。</p>
+                </div>
+                <div class="advantage-card">
+                    <h4>多设备兼容</h4>
+                    <p>从手机到桌面均保持基础布局，核心功能在主流浏览器上均可正常显示。</p>
+                </div>
+                <div class="advantage-card">
+                    <h4>信息透明</h4>
+                    <p>页面说明均以实际展示为准，不掺杂隐藏链接或诱导点击的按钮。</p>
+                </div>
+                <div class="advantage-card">
+                    <h4>持续更新</h4>
+                    <p>入口地址保持长期有效，内容根据实际反馈做适度调整。</p>
+                </div>
+            </div>
+            <p style="margin-top: 20px;">如果你对当前界面有任何疑问，可以参考下方的 FAQ 摘要，或直接访问 <a href="https://bydaren.com" class="inline-link">捕鱼达人</a> 了解最新情况。</p>
+        </section>
+
+        <!-- 场景与特点说明 -->
+        <section class="section">
+            <h2>基础场景与特点</h2>
+            <h3>玩法概述</h3>
+            <p>在海洋场景中，通过瞄准并发射炮弹击中不同种类的鱼群获得积分。部分版本包含道具、倍率或限时挑战，但核心逻辑保持简单：瞄准、发射、积累。</p>
+            <h3>适合哪些场景</h3>
+            <ul>
+                <li>日常消遣，短时间放松</li>
+                <li>熟悉休闲射击操作</li>
+                <li>观察不同鱼种的分值与规律</li>
+                <li>在无网络压力下轻度体验</li>
+            </ul>
+            <h3>页面稳定性说明</h3>
+            <p>本入口页基于标准 HTML 构建，无外部依赖库。如果遇到加载异常，建议检查本地网络或浏览器缓存。也可以通过 <a href="https://bydaren.com" class="inline-link">捕鱼达人</a> 直接确认当前页面状态。</p>
+        </section>
+
+        <!-- FAQ 摘要 -->
+        <section class="section">
+            <h2>常见疑问（FAQ 摘要）</h2>
+            <div class="faq-item">
+                <div class="faq-question">是否需要下载客户端或安装插件？</div>
+                <div class="faq-answer">不需要。直接在浏览器中打开即可，无需额外软件。部分特殊功能可能依赖 HTML5 支持，大多数现代浏览器均兼容。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">为什么有时候页面显示不全？</div>
+                <div class="faq-answer">极少数老旧浏览器或屏幕过小设备可能出现排版偏移。建议更新浏览器至最新版本，或尝试横屏浏览。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">页面内容会变化吗？</div>
+                <div class="faq-answer">会。本说明页会根据实际运营情况不定期更新，但核心入口地址保持不变。建议以 <a href="https://bydaren.com" class="inline-link">捕鱼达人</a> 页面展示为准。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">如何反馈问题或建议？</div>
+                <div class="faq-answer">目前暂无专用反馈通道，您可以通过页面相关渠道留言。我们会在后续版本中考虑增加互动方式。</div>
+            </div>
+        </section>
+
+        <!-- 底部链接 -->
+        <div class="footer-links">
+            <p>© 本页为说明页 · 内容仅供参考 · 具体以 <a href="https://bydaren.com">捕鱼达人</a> 实际界面为准</p>
+            <p>稳定入口 · 持续维护</p>
+        </div>
+
+    </div>
+    <!-- end container -->
+
+</body>
+</html>
